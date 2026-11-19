@@ -1,4 +1,4 @@
-cat << 'EOF' > index.php
+rm -f index.html test.txt && cat << 'EOF' > index.php
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: text/plain");
