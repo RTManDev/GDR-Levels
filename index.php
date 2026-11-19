@@ -1,15 +1,14 @@
-rm -f index.html test.txt && cat << 'EOF' > index.php
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: text/plain");
 
 $file = __DIR__ . '/data.txt';
-$action = $_GET['action'] ?? '';
+$action = isset($_GET['action']) ? $_GET['action'] : '';
 
 if ($action === 'get') {
     echo file_exists($file) ? file_get_contents($file) : '';
 } elseif ($action === 'set') {
-    $data = $_GET['data'] ?? '';
+    $data = isset($_GET['data']) ? $_GET['data'] : '';
     file_put_contents($file, $data, LOCK_EX);
     echo 'OK';
 } elseif ($action === 'clear') {
@@ -19,4 +18,3 @@ if ($action === 'get') {
     echo 'SERVER READY';
 }
 ?>
-EOF
